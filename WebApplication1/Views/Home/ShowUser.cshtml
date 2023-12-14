@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "ShowUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userList = (IEnumerable<user>)ViewData["UserList"];
+}
+
+
+<style>
+    th {
+        color: saddlebrown;
+        font-size: 18px;
+        text-shadow: 1px 0px #8B4513;
+        border: 1px solid black;
+        text-align: center;
+        padding: 15px;
+    }
+
+    tr {
+        border: 1px solid black;
+    }
+
+    td {
+        padding: 15px;
+    }
+
+    button {
+        background-color: #8D6E57;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 2px 2px 5px #654632;
+        font-size: 14px;
+    }
+
+
+    button:hover {
+        background-color: #B5651D;
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    h2 {
+        color: #8D6E57;
+        text-shadow: 1px 1px 2px #654632;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    .action-buttons {
+        text-align: center;
+    }
+</style>
+
+
+<h2 style="text-align: center; margin-top: 50px;">Show User</h2>
+<table border="1">
+    <tr>
+        <th style="padding: 20px;">First Name</th>
+        <th style="padding: 20px;">Last Name</th>
+        <th style="padding: 20px;">Email</th>
+        <th style="padding: 20px;">Password</th>
+        <th style="padding: 20px;">Actions</th>
+    </tr>
+    @foreach (var item in userList)
+    {
+
+
+        <tr>
+
+            <td style="padding: 20px;">@item.firstName</td>
+            <td style="padding: 20px;">@item.lastName</td>
+            <td style="padding: 20px;">@item.email</td>
+            <td style="padding: 20px;">@item.password</td>
+            <td style="padding: 20px;">
+                <form action="EditUser" method="post">
+                    <input type="hidden" name="id" value="@item.userId" />
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="DeleteUser" method="post">
+                    <input type="hidden" name="id" value="@item.userId" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+
+    }
+</table>
